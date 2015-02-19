@@ -1,0 +1,16 @@
+Local Storage
+=============
+(Persistent)
+
+window.localStorage
+	key/value pairs
+	both key and value should be strings
+
+	APIs
+	====
+	setItem(key,value)
+	removeItem(key)
+	getItem(key) => value
+	clear()
+	key(index) => key
+	length
