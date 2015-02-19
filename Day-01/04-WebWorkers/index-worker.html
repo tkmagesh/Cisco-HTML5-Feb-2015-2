@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Do Work</title>
+	<script>
+	window.addEventListener("DOMContentLoaded", init);
+	var doWorkWorker = null;
+	function init(){
+		doWorkWorker = new Worker("longRunningTask.js");
+		doWorkWorker.addEventListener("message", onMessageFromWorker);
+
+		document.getElementById("btnDoWork").addEventListener("click", onBtnDoWork);
+	}
+
+	function onMessageFromWorker(msgEvtArg){
+		if (msgEvtArg.data === "done"){
+			displayMessage("Work Completed");
+		} else {
+			console.log("unknown message from worker ", msgEvtArg.data);
+		}
+	}
+
+	function onBtnDoWork(){
+		doWorkWorker.postMessage("start");
+		displayMessage("Work Started");
+	}
+
+	function displayMessage(msg){
+		document.getElementById("divMessages").innerHTML += msg + "<br/>";
+	}
+
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="">
+	<input type="button" value="Do Work" id="btnDoWork">
+	<div>
+		<progress id="progress" min="0" max="100" value="0"></progress>
+	</div>
+	<div id="divMessages"></div>
+</body>
+</html>

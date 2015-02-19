@@ -14,3 +14,12 @@ window.localStorage
 	clear()
 	key(index) => key
 	length
+
+Web Worker
+==========
+new Worker("script.js")
+messages -> for communication
+
+API
+	 -> postMessage(obj)
+	 -> message => event
