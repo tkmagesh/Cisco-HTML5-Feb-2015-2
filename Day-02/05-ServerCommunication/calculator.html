@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Calculator</title>
+	<script src="jquery-1.11.2.js"></script>
+	<script>
+	$(function(){
+		$("#btnCalculate").click(function(){
+			var n1 = $("#txtNumber1").val(),
+				n2 = $("#txtNumber2").val(),
+				oper = $("#operation").val(),
+				endPoint = "calculate?n1="+n1 + "&n2=" + n2 + "&operation=" + oper;
+			console.log(endPoint);
+			$.ajax({
+				url : endPoint,
+				method : "get",
+				success : function(res){
+					$("#divResult").html(res);
+				}
+			});
+		});
+	});
+	</script>
+</head>
+<body>
+	<form action="/calculate">
+		<input type="text" name="n1" id="txtNumber1">
+		<input type="text" name="n2" id="txtNumber2">
+		<select name="operation" id="operation">
+			<option value="add">add</option>
+			<option value="subtract">subtract</option>
+			<option value="multiply">multiply</option>
+			<option value="divide">divide</option>
+		</select>
+
+		<input type="button" value="Calculate" id="btnCalculate">
+		<div id="divResult"></div>
+	</form>
+</body>
+</html>
